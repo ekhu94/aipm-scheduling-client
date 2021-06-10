@@ -42,11 +42,11 @@ class CalendarContainer extends React.Component {
       e.target.className ===
         'MuiTableCell-root MuiTableCell-body makeStyles-cell-73 makeStyles-brightRightBorder-76'
     ) {
-      const next = this.getPreviousWorkOrder(e.clientX, e.clientY);
-      if (next) {
-        console.log(this.convertTimeText(next.innerText));
-        console.log(next);
-      }
+      const prev = this.getPreviousWorkOrder(e.clientX, e.clientY);
+      const next = this.getNextWorkOrder(e.clientX, e.clientY);
+      //TODO need to calculate difference in time between prev and next
+
+      //TODO create pop-up module to display time
     }
   };
 
@@ -54,7 +54,7 @@ class CalendarContainer extends React.Component {
     let hours = parseInt(time.split(':')[0]);
     let mins = parseInt(time.split(':')[1].split(' ')[0]);
     const isAfternoon = time.split(' ')[1] === 'PM';
-    if (isAfternoon) hours += 12;
+    if (isAfternoon && hours !== 12) hours += 12;
     return hours * 60 + mins;
   };
 
@@ -90,15 +90,6 @@ class CalendarContainer extends React.Component {
     }
     const time = this.getTimeChild(document.elementFromPoint(x, newY));
     return time;
-    // const start = document.elementFromPoint(x, newY);
-    // if (!start) return;
-    // const nextChild = start.children[0];
-    // if (!nextChild) return;
-    // const grandChild = nextChild.children[0];
-    // if (!grandChild) return;
-    // const lastChild = grandChild.children[1];
-    // if (!lastChild) return grandChild.children[0].children[1];
-    // return lastChild.firstChild;
   };
 
   getTimeChild = (elem, next = true) => {

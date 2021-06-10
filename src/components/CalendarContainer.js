@@ -15,10 +15,17 @@ import {
   AppointmentForm,
 } from '@devexpress/dx-react-scheduler-material-ui';
 
+import TimeModal from './TimeModal';
+
 class CalendarContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showModal: false,
+      openTime: {
+        hours: 0,
+        mins: 0,
+      },
       resources: [
         {
           fieldName: 'technicians',
@@ -45,7 +52,43 @@ class CalendarContainer extends React.Component {
       const prev = this.getPreviousWorkOrder(e.clientX, e.clientY);
       const next = this.getNextWorkOrder(e.clientX, e.clientY);
       //TODO need to calculate difference in time between prev and next
-
+      //! whole day free
+      if (!prev && !next) {
+        this.setState({ openTime: { ...this.state.openTime, hours: 12 } });
+      } //! else if no prev work orders
+      else if (!prev) {
+        const hours = Math.floor(
+          (this.convertTimeText(next.innerText) - 360) / 60
+        );
+        const mins = (this.convertTimeText(next.innerText) - 360) % 60;
+        this.setState({
+          openTime: { ...this.state.openTime, hours: hours, mins: mins },
+        });
+      } //! else if no next work orders
+      else if (!next) {
+        const hours = Math.floor(
+          (1080 - this.convertTimeText(prev.innerText)) / 60
+        );
+        const mins = (1080 - this.convertTimeText(prev.innerText)) % 60;
+        this.setState({
+          openTime: { ...this.state.openTime, hours: hours, mins: mins },
+        });
+      } //! else calculate different between prev end time & next start time
+      else {
+        const hours = Math.floor(
+          (this.convertTimeText(next.innerText) -
+            this.convertTimeText(prev.innerText)) /
+            60
+        );
+        const mins =
+          (this.convertTimeText(next.innerText) -
+            this.convertTimeText(prev.innerText)) %
+          60;
+        this.setState({
+          openTime: { ...this.state.openTime, hours: hours, mins: mins },
+        });
+      }
+      this.setState({ showModal: true });
       //TODO create pop-up module to display time
     }
   };
@@ -130,6 +173,12 @@ class CalendarContainer extends React.Component {
             <GroupingPanel />
           </Scheduler>
         </Paper>
+        <TimeModal
+          show={this.state.showModal}
+          onHide={() => this.setState({ showModal: false })}
+          hours={this.state.openTime.hours}
+          mins={this.state.openTime.mins}
+        />
       </div>
     );
   }

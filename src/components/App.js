@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { teal, indigo } from '@material-ui/core/colors';
+import { Container, Row } from 'react-bootstrap';
 
 import CalendarContainer from './CalendarContainer';
+import Loader from './Loader';
+import aipm from '../services/api';
+import logo from '../assets/aipm-logo.png';
 
 const App = () => {
   const [technicians, setTechnicians] = useState([]);
@@ -10,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get('http://localhost:3000/api/v1/technicians');
+      const res = await aipm.get('/technicians');
       setTechnicians(res.data);
     };
     getData();
@@ -69,11 +72,18 @@ const App = () => {
   return (
     <div>
       {technicians.length && workOrders.length ? (
-        <CalendarContainer
-          technicians={configureTechnicians()}
-          workOrders={configureWorkOrders()}
-        />
-      ) : null}
+        <Container fluid>
+          <Row className='justify-content-center'>
+            <img src={logo} alt='aipm-logo' style={{ width: '100px' }} />
+          </Row>
+          <CalendarContainer
+            technicians={configureTechnicians()}
+            workOrders={configureWorkOrders()}
+          />
+        </Container>
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };

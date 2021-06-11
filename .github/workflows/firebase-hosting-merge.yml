@@ -15,8 +15,8 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AIPM_SCHEDULING_11B0D }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AIPM_SCHEDULING_11B08 }}'
           channelId: live
-          projectId: aipm-scheduling-11b0d
+          projectId: aipm-scheduling-11b08
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels

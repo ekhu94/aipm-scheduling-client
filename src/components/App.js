@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await aipm.get('/technicians');
+      const res = await aipm.get('technicians');
       setTechnicians(res.data);
     };
     getData();
@@ -55,7 +55,6 @@ const App = () => {
   };
 
   const configureWorkOrders = () => {
-    console.log(workOrders);
     const data = [];
     for (let workOrder of workOrders) {
       data.push({
@@ -73,7 +72,7 @@ const App = () => {
     <div>
       {technicians.length && workOrders.length ? (
         <Container fluid>
-          <Row className='justify-content-center'>
+          <Row className='justify-content-center mt-3'>
             <img src={logo} alt='aipm-logo' style={{ width: '100px' }} />
           </Row>
           <CalendarContainer

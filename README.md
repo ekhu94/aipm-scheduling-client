@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Advanced-IPM Scheduling
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Deployed Site](https://aipm-client.herokuapp.com/)
 
-## Available Scripts
+This application was built using a React with DevExtreme's React Scheduler library on the front end with a Ruby On Rails API on the back end. The biggest challenge was incorporating the Scheduler library together with deliverables required on this project such as the pop-up module when clicking open time slots, and configuring API data from Rails to play well with the library's components.
 
-In the project directory, you can run:
+If I continued working on this project, my immediate next step would be to build full CRUD capabilities for technicians, work orders, and locations. Using the scheduler library, it is easy importing plug-ins to alter appointments on the calendar, but I would make sure those changes are persisted in Rails on new creations, updates, or deletions.
 
-### `yarn start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React | React Scheduler | Bootstrap | Material UI
+- Ruby on Rails | PostgreSQL [GitHub link here](https://github.com/ekhu94/aipm-scheduling-server)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setup and Installation
 
-### `yarn test`
+### Clone the repository from [Github](https://github.com/ekhu94/aipm-scheduling-client).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone git@github.com:ekhu94/aipm-scheduling-client.git
+```
 
-### `yarn build`
+### Check your node version with `node -v`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You will need to have `Node Package Manager` in order to run this application. You can install node/npm using [node](https://nodejs.org/en/download/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Install dependencies using NPM or Yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Run `npm install` or `yarn add` to install all required dependencies.
 
-### `yarn eject`
+### Configure API endpoint
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+By default, the server-side API endpoint is set to its deployed address on Heroku. If you have the back end server repository running locally on `localhost:3000`, you will need to change the value of `BACKEND_URL` inside `src/services/api.js`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### `src/services/api.js`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+const BACKEND_URL = 'https://localhost:3000/api/v1/';
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Serve
 
-## Learn More
+Once dependencies are installed, use `npm start` to boot up the application.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### Code Splitting
+Please make sure to update tests as appropriate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
+[MIT](https://choosealicense.com/licenses/mit/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Created By
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Erik Huang - https://github.com/ekhu94
